@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <regex>
 
 int main() {
 
@@ -10,6 +11,13 @@ int main() {
 
         std::cout << " > ";  
         std::cin >> args;
-        std::cout << typeid(args).name();
+        
+        // TODO: fix this regular expression
+        std::regex e ("([a-zA-Z])\w+)");
+        if ( std::regex_match(e, args) ) {
+            std::cout << "Output is a string";
+        } else {
+            "Unknown output"
+        }
        
 };
