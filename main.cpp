@@ -23,7 +23,7 @@ int read_file(std::string filename) {
     while (getline ( readfile, line )) {
         std::cout << line << std::endl;
     };
-    
+
     return 0;
 
 };
@@ -37,15 +37,24 @@ int main() {
 
     std::cout << "Custom Linux Shell" << std::endl;
 
-    std::cout << " > ";  
+    while (1) {
+        std::cout << "> ";  
 
-    std::cin >> arg1;
+        std::cin >> arg1 ;
 
-    if (arg1 == "ls") {
-        find_files();
-    }; if (arg1 == "cat") {
-        read_file("hello.txt");
-    };
+        if (std::cin >> arg2) {
+            std::cout << arg2;
+        };
+        
+
+        if (arg1 == "ls") {
+            find_files();
+        }; if (arg1 == "cat") {
+            read_file("hello.txt");
+        };
+
+    }
+
 
 
 
