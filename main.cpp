@@ -15,17 +15,15 @@ int find_files() {
     return 0;
 };
 
-int read_file(std::string filename) {
+void read_file(std::string filename) {
+    
     std::ifstream readfile(filename);
     
     std::string line;
 
-    while (getline ( readfile, line )) {
+    while (std::getline ( readfile, line )) {
         std::cout << line << std::endl;
     };
-
-    return 0;
-
 };
 
 
@@ -35,22 +33,16 @@ int main() {
     std::vector<std::string> args_vector;
     std::string arg1, arg2;
 
-    std::cout << "Custom Linux Shell" << std::endl;
-
     while (1) {
         std::cout << "> ";  
 
-        std::cin >> arg1 ;
-
-        if (std::cin >> arg2) {
-            std::cout << arg2;
-        };
-        
+        std::cin >> arg1;
+        std::getline(std::cin, arg2);
 
         if (arg1 == "ls") {
             find_files();
         }; if (arg1 == "cat") {
-            read_file("hello.txt");
+            read_file(arg2);
         };
 
     }
