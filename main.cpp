@@ -4,6 +4,8 @@
 #include <filesystem>
 #include <string>
 #include <fstream>
+#include <cstring>
+
 
 int find_files() {
     // TODO: make output more readable
@@ -15,18 +17,21 @@ int find_files() {
     return 0;
 };
 
-void read_file(std::string filename) {
-    
-    std::ifstream readfile(filename);
+int read_file(char* filename) {
     
     std::string line;
+    std::ifstream readfile;
+
+    readfile.open(filename);
 
     while (std::getline ( readfile, line )) {
         std::cout << line << std::endl;
+
     };
+    readfile.close();
+
+    return 0;
 };
-
-
 
 int main() {
 
@@ -42,15 +47,17 @@ int main() {
         if (arg1 == "ls") {
             find_files();
         }; if (arg1 == "cat") {
-            read_file(arg2);
-        };
+            int length = arg2.length();
+            char* char_arg2 = new char[length + 1];
 
-    }
+            strcpy(char_arg2, arg2.c_str());
 
-
-
-
-        
+            read_file(char_arg2);
+        }; if (arg1 == "echo") {
+            std::cout << arg2 << std::endl;
+        }; 
+    };
+    
     // TODO: fix this regular expression
     // std::regex e ("([a-zA-Z])\w+)");
     // if ( std::regex_match(e, args) ) {
