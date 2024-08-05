@@ -34,14 +34,23 @@ int read_file(char* filename) {
 };
 
 int main() {
-
     std::vector<std::string> args_vector;
     std::string arg1, arg2;
+
+    
+    // char regex_e[] = "[a-zA-Z]\w+";
 
     while (1) {
         std::cout << "> ";  
 
         std::cin >> arg1;
+
+        std::regex characters ("[^a-zA-Z0-9]+");
+
+        if (std::regex_match(arg1, characters)) {
+           std::cout << "Unknown output";
+        };
+
         std::getline(std::cin, arg2);
 
         if (arg1 == "ls") {
@@ -59,12 +68,7 @@ int main() {
     };
     
     // TODO: fix this regular expression
-    // std::regex e ("([a-zA-Z])\w+)");
-    // if ( std::regex_match(e, args) ) {
-    //     std::cout << "Output is a string";
-    // } else {
-    //     "Unknown output"
-    // }
+
 
     return 0;
        
