@@ -5,7 +5,7 @@
 #include <string>
 #include <fstream>
 #include <cstring>
-
+#include <unistd.h>
 
 int find_files() {
     // TODO: make output more readable
@@ -33,12 +33,19 @@ int read_file(char* filename) {
     return 0;
 };
 
+char* str_to_char(std::string str) {
+        int length = str.length();
+        char* char_str = new char[length + 1];
+
+        strcpy(char_str, str.c_str());
+
+        return char_str;
+}
+
 int main() {
     std::vector<std::string> args_vector;
     std::string arg1, arg2;
 
-    
-    // char regex_e[] = "[a-zA-Z]\w+";
 
     while (1) {
         std::cout << "> ";  
@@ -53,22 +60,16 @@ int main() {
 
         std::getline(std::cin, arg2);
 
-        if (arg1 == "ls") {
+        if (arg1 == "ls") { 
             find_files();
         }; if (arg1 == "cat") {
-            int length = arg2.length();
-            char* char_arg2 = new char[length + 1];
-
-            strcpy(char_arg2, arg2.c_str());
-
-            read_file(char_arg2);
+            read_file(str_to_char(arg2));
         }; if (arg1 == "echo") {
             std::cout << arg2 << std::endl;
-        }; 
+        }; if (arg1 == "cd") {
+            chdir(str_to_char(arg2));
+        }
     };
-    
-    // TODO: fix this regular expression
-
 
     return 0;
        
