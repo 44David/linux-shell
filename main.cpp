@@ -6,6 +6,7 @@
 #include <fstream>
 #include <cstring>
 #include <unistd.h>
+#include <sstream>
 
 int find_files() {
     // TODO: make output more readable
@@ -33,9 +34,9 @@ int read_file(char* filename) {
     return 0;
 };
 
-char* str_to_char(std::string str) {
+char * str_to_char(std::string str) {
         int length = str.length();
-        char* char_str = new char[length + 1];
+        char *char_str = new char [length + 1];
 
         strcpy(char_str, str.c_str());
 
@@ -70,7 +71,19 @@ int main() {
             chdir(str_to_char(arg2));
         }; if (arg1 == "pwd") {
             std::cout << std::filesystem::current_path() << std::endl;
+        }; if (arg1 == "run") {
+            
+            std::ostringstream oss;
+            oss << "chmod +x " << arg2;
+            std::string chmod_string = oss.str();
+            system(str_to_char(chmod_string));
+
+            std::ostringstream oss2;
+            oss2 << "./" << arg2;
+            std::string exec_string = oss.str();
+            system(str_to_char(exec_string));
         }
+
     };
 
     return 0;
