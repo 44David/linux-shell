@@ -52,10 +52,10 @@ int main() {
 
         std::cin >> arg1;
 
-        std::regex characters ("[^a-zA-Z0-9]+");
+        std::regex characters ("[^a-zA-Z0-9/.*!#(){}=+-~]+");
 
         if (std::regex_match(arg1, characters)) {
-           std::cout << "Unknown output";
+           std::cout << "Unknown output" << std::endl;;
         };
 
         std::getline(std::cin, arg2);
@@ -68,6 +68,8 @@ int main() {
             std::cout << arg2 << std::endl;
         }; if (arg1 == "cd") {
             chdir(str_to_char(arg2));
+        }; if (arg1 == "pwd") {
+            std::cout << std::filesystem::current_path() << std::endl;
         }
     };
 
