@@ -7,6 +7,8 @@
 #include <cstring>
 #include <unistd.h>
 #include <sstream>
+#include <cstdio>
+#include <cstdlib>
 
 int find_files() {
     // TODO: make output more readable
@@ -39,7 +41,6 @@ char * str_to_char(std::string str) {
         char *char_str = new char [length + 1];
 
         strcpy(char_str, str.c_str());
-
         return char_str;
 }
 
@@ -60,7 +61,10 @@ int main() {
         };
 
         std::getline(std::cin, arg2);
+        
 
+        // TODO make this more readable and efficient.
+        // TODO add error handling for all functions and commands.
         if (arg1 == "ls") { 
             find_files();
         }; if (arg1 == "cat") {
@@ -72,7 +76,7 @@ int main() {
         }; if (arg1 == "pwd") {
             std::cout << std::filesystem::current_path() << std::endl;
         }; if (arg1 == "run") {
-            
+
             std::ostringstream oss;
             oss << "chmod +x " << arg2;
             std::string chmod_string = oss.str();
@@ -82,6 +86,12 @@ int main() {
             oss2 << "./" << arg2;
             std::string exec_string = oss.str();
             system(str_to_char(exec_string));
+        }; if (arg1 == "touch") {
+            std::ofstream outfile (arg2);
+        }; if (arg1 == "mkdir") {
+                std::filesystem::create_directories(arg2);
+        }; if (arg1 == "rm") {
+            std::remove(str_to_char(arg2));
         }
 
     };
