@@ -44,7 +44,7 @@ char * str_to_char(std::string str) {
         return char_str;
 }
 
-int main() {
+int main(int argc, char** argv) {
     std::vector<std::string> args_vector;
     std::string arg1, arg2;
 
