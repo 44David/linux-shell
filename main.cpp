@@ -45,10 +45,7 @@ char * str_to_char(std::string str) {
 }
 
 int main(int argc, char** argv) {
-    std::vector<std::string> args_vector;
-    std::string arg1, arg2;
-
-
+    
     while (1) {
         std::cout << "> ";  
 
@@ -62,41 +59,50 @@ int main(int argc, char** argv) {
 
         std::getline(std::cin, arg2);
         
+        // TODO make this more efficient 
+        if (argc == 1) {
+            if (argv == "ls") {
+                find_files();
+            }; 
+            if (argv == "pwd") {
+                std::cout << std::filesystem::current_path() << std:endl;
+            };
+        } 
+        
+        else if (argc == 2) {
+            if (argv[0] == "cat") {
+                read_file(argv[1]);
+            };
+            if (argv[0] == "echo") {
+                std::cout << argv[1];
+            };
+            if (argv[0] == "cd") {
+                chdir(argv[1]);
+            };
+            if (argv[0] == "run") {
+                std::ostringstream oss;
+                oss << "chmod +x " << argv[1];
+                std::string chmod_string = oss.str();
+                system(str_to_char(chmod_string));
 
-        // TODO make this more readable and efficient.
-        // TODO add error handling for all functions and commands.
-        if (arg1 == "ls") { 
-            find_files();
-        }; if (arg1 == "cat") {
-            read_file(str_to_char(arg2));
-        }; if (arg1 == "echo") {
-            std::cout << arg2 << std::endl;
-        }; if (arg1 == "cd") {
-            chdir(str_to_char(arg2));
-        }; if (arg1 == "pwd") {
-            std::cout << std::filesystem::current_path() << std::endl;
-        }; if (arg1 == "run") {
+                std::ostringstream oss2;
+                oss2 << "./" << argv[1];
+                std::string exec_string = oss.str();
+                system(str_to_char(exec_string));
+            };
+            if (argv[0] == "touch") {
+                std::ofstream outfile (argv[1]);
+            };
+            if (argv[0] == "mkdir") {
+                std::filesystem::create_directories(argv[1]);
+            };
+            if (argv[0] == "rm") {
+                std::remove(argv[1]);
+            };
 
-            std::ostringstream oss;
-            oss << "chmod +x " << arg2;
-            std::string chmod_string = oss.str();
-            system(str_to_char(chmod_string));
-
-            std::ostringstream oss2;
-            oss2 << "./" << arg2;
-            std::string exec_string = oss.str();
-            system(str_to_char(exec_string));
-        }; if (arg1 == "touch") {
-            std::ofstream outfile (arg2);
-        }; if (arg1 == "mkdir") {
-                std::filesystem::create_directories(arg2);
-        }; if (arg1 == "rm") {
-            std::remove(str_to_char(arg2));
-        }
-
-    };
-
-    return 0;
+        };
        
+    return 0;
+    
+    };
 };
-
