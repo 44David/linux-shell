@@ -59,24 +59,34 @@ int main(int argc, char** argv) {
         
         // TODO make this more efficient 
         if (argc == 1) {
-            if (argv[0] == "ls") {
-                find_files();
-            }; 
-            if (argv[0] == "pwd") {
-                std::cout << std::filesystem::current_path() << std::endl;
+            if (!execvp(argv[0], NULL)) {
+                
+            } else {
+                execvp(argv[0], NULL);
             };
-        } 
+
+        };
         
-        else if (argc == 2) {
-            if (argv[0] == "cat") {
-                read_file(argv[1]);
-            };
-            if (argv[0] == "echo") {
-                std::cout << argv[1];
-            };
-            if (argv[0] == "cd") {
-                chdir(argv[1]);
-            };
+
+        // if (argc == 1) {
+        //     if (argv[0] == "ls") {
+        //         find_files();
+        //     }; 
+        //     if (argv[0] == "pwd") {
+        //         std::cout << std::filesystem::current_path() << std::endl;
+        //     };
+        // } 
+        
+        if (argc == 2) {
+            // if (argv[0] == "cat") {
+            //     read_file(argv[1]);
+            // };
+            // if (argv[0] == "echo") {
+            //     std::cout << argv[1];
+            // };
+            // if (argv[0] == "cd") {
+            //     chdir(argv[1]);
+            // };
             if (argv[0] == "run") {
                 std::ostringstream oss;
                 oss << "chmod +x " << argv[1];
@@ -88,15 +98,16 @@ int main(int argc, char** argv) {
                 std::string exec_string = oss.str();
                 system(str_to_char(exec_string));
             };
-            if (argv[0] == "touch") {
-                std::ofstream outfile (argv[1]);
-            };
-            if (argv[0] == "mkdir") {
-                std::filesystem::create_directories(argv[1]);
-            };
-            if (argv[0] == "rm") {
-                std::remove(argv[1]);
-            };
+            // if (argv[0] == "touch") {
+            //     std::ofstream outfile (argv[1]);
+            // };
+            // if (argv[0] == "mkdir") {
+            //     std::filesystem::create_directories(argv[1]);
+            // };
+            // if (argv[0] == "rm") {
+            //     std::remove(argv[1]);
+            // };
+
 
         };
        
