@@ -49,23 +49,21 @@ int main(int argc, char** argv) {
     while (1) {
         std::cout << "> ";  
 
-        std::cin >> arg1;
 
         std::regex characters ("[^a-zA-Z0-9/.*!#(){}=+-~]+");
 
-        if (std::regex_match(arg1, characters)) {
-           std::cout << "Unknown output" << std::endl;;
-        };
+        // if (std::regex_match(arg1, characters)) {
+        //    std::cout << "Unknown output" << std::endl;;
+        // };
 
-        std::getline(std::cin, arg2);
         
         // TODO make this more efficient 
         if (argc == 1) {
-            if (argv == "ls") {
+            if (argv[0] == "ls") {
                 find_files();
             }; 
-            if (argv == "pwd") {
-                std::cout << std::filesystem::current_path() << std:endl;
+            if (argv[0] == "pwd") {
+                std::cout << std::filesystem::current_path() << std::endl;
             };
         } 
         
