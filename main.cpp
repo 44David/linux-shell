@@ -44,6 +44,14 @@ char * str_to_char(std::string str) {
         return char_str;
 }
 
+void save_output(char** args) {
+    std::ofstream commandfile ("command-history.txt");
+
+    commandfile << args;
+
+    commandfile.close();
+};
+
 int main(int argc, char** argv) {
     
     while (1) {
@@ -58,7 +66,11 @@ int main(int argc, char** argv) {
 
         
         // TODO make this more efficient 
-
+        
+        //for (int i = 0 ; i >= argc ; i++){
+        save_output(argv);  
+        //}
+        
         
         if (argc == 1) {
             if (argv[0] == "ls") {
@@ -110,7 +122,11 @@ int main(int argc, char** argv) {
             std::ofstream outfile (argv[2]);
 
             outfile << input;
-        }
+
+            outfile.close();
+        };
+
+
        
     return 0;
     
